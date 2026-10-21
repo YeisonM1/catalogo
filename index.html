@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Yeison, fotos y videos de producto</title>
+<meta name="description" content="Me mandás la foto de tu producto con el celular y te la devuelvo lista para vender: escenas, modelo y video. Hecho en Medellín con IA.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cg fill='%2316241c'%3E%3Cpath d='M141 152 C 143 188, 142 224, 142 254 C 142 266, 158 266, 158 254 C 158 224, 157 188, 159 152 Z'/%3E%3Cpath d='M153 166 C 120 158, 72 122, 56 50 C 108 60, 146 106, 158 160 Z'/%3E%3Cpath d='M147 154 C 162 112, 200 80, 248 72 C 240 118, 202 150, 147 154 Z'/%3E%3C/g%3E%3Ccircle cx='150' cy='70' r='30' fill='%23f2a41c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..800,100&family=Schibsted+Grotesk:wght@400;500;600&family=Tenor+Sans&family=Marcellus&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="media/silleta_flores.webp">
+<style>
+:root{
+  --papel:#ffffff; --tinta:#16241c; --tinta-suave:#4a5a50; --linea:#dfe5e0;
+  --caléndula:#f2a41c; --caléndula-oscura:#b8770a;
+  --silleta:#f3d9cf; --silleta-tinta:#5b2a22;
+  --grano:#2f1d12; --grano-kraft:#c9a27b;
+  --ceiba:#ece4d6; --ceiba-tinta:#3d3426;
+  --display:"Fraunces",Georgia,serif; --texto:"Schibsted Grotesk",system-ui,sans-serif;
+  --borde:14px;
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--papel);color:var(--tinta);font:17px/1.55 var(--texto);font-feature-settings:"ss01"}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--caléndula);outline-offset:3px;border-radius:4px}
+.envoltura{width:min(100% - 32px,1080px);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);font-variation-settings:"SOFT" 100;font-weight:600;line-height:1.02;letter-spacing:-.015em}
+h1{font-size:clamp(3rem,13vw,7.2rem)}
+h2{font-size:clamp(2.2rem,8vw,4.4rem)}
+h3{font-size:1.35rem;line-height:1.2}
+p{max-width:38em}
+.suave{color:var(--tinta-suave)}
+
+/* ---------- botón de WhatsApp ---------- */
+.boton{display:inline-flex;align-items:center;gap:.6em;background:var(--caléndula);color:var(--tinta);text-decoration:none;
+  font-weight:600;padding:.95em 1.4em;border-radius:999px;font-size:1.02rem;border:0;cursor:pointer}
+.boton svg{width:1.25em;height:1.25em}
+.boton,.nav-wa,.sonido{transition:background-color .3s ease,transform .3s ease,box-shadow .3s ease}
+.boton:hover,.nav-wa:hover{background:#f6b440;transform:translateY(-1px);box-shadow:0 4px 14px rgba(184,119,10,.25)}
+.boton:active,.nav-wa:active{transform:none;box-shadow:none}
+.sonido:hover{background:#fff}
+@media (prefers-reduced-motion:reduce){.boton:hover,.nav-wa:hover{transform:none}}
+.flotante{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:20;box-shadow:0 6px 24px rgba(22,36,28,.25);
+  transform:translateY(140%);transition:transform .35s ease}
+.flotante.visible{transform:none}
+@media (prefers-reduced-motion:reduce){.flotante{transition:none}}
+
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:30;padding:12px 0;background:rgba(255,255,255,0);box-shadow:0 1px 0 rgba(223,229,224,0);transition:background-color .4s ease,box-shadow .4s ease}
+.nav.bajado{background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(223,229,224,1)}   /* solo cambia el fondo: el alto nunca cambia, así nada salta */
+.nav-in{display:flex;align-items:center;gap:20px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--tinta)}
+.logo .brote{width:40px;height:40px}
+.logo span{font-family:var(--display);font-variation-settings:"SOFT" 100;font-weight:600;font-size:1.45rem;letter-spacing:-.01em}
+.enlaces{display:none;list-style:none;padding:0;margin:0 0 0 auto;gap:26px}
+.enlaces a{text-decoration:none;font-weight:500;position:relative;padding:4px 0}
+.enlaces a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--caléndula);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.enlaces a:hover::after,.enlaces a:focus-visible::after{transform:scaleX(1)}
+.nav-wa{margin-left:auto;display:inline-flex;align-items:center;gap:.45em;background:var(--caléndula);color:var(--tinta);text-decoration:none;font-weight:600;
+  border-radius:999px;padding:.55em .95em;font-size:.95rem}
+.nav-wa svg{width:1.15em;height:1.15em}
+@media (min-width:860px){.enlaces{display:flex}.nav-wa{margin-left:8px}}
+/* el logo se dibuja una vez al cargar: tallo, hojas, sol */
+.brote .tallo,.brote .hoja1,.brote .hoja2,.brote .sol{transform-box:fill-box}
+.brote .tallo{transform-origin:50% 100%;animation:b-crece .55s ease-out both}
+.brote .hoja1{transform-origin:100% 100%;animation:b-abre .5s .4s cubic-bezier(.2,.9,.25,1.25) both}
+.brote .hoja2{transform-origin:0% 100%;animation:b-abre .5s .55s cubic-bezier(.2,.9,.25,1.25) both}
+.brote .sol{transform-origin:50% 50%;animation:b-sol .45s .85s cubic-bezier(.2,.9,.25,1.5) both}
+.logo:hover .sol{animation:b-salto .5s ease}
+@keyframes b-crece{from{transform:scaleY(0)}}
+@keyframes b-abre{from{transform:scale(0) rotate(-14deg)}}
+@keyframes b-sol{from{transform:scale(0)}}
+@keyframes b-salto{40%{transform:translateY(-14%)}}
+@media (prefers-reduced-motion:reduce){.brote *{animation:none!important}}   /* el fundido del nav se mantiene: no es movimiento */
+
+/* ---------- antes / después ---------- */
+.ad{position:relative;overflow:hidden;border-radius:var(--borde);aspect-ratio:4/5;background:#ddd;touch-action:pan-y;user-select:none}
+.ad img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ad .antes{clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
+.ad .divisor{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:3px;margin-left:-1.5px;background:#fff;pointer-events:none}
+.ad .perilla{position:absolute;top:50%;left:var(--pos,50%);width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;
+  background:#fff;display:grid;place-items:center;box-shadow:0 2px 12px rgba(0,0,0,.25);pointer-events:none}
+.ad .perilla svg{width:26px;height:26px}
+.ad .rotulo{position:absolute;bottom:12px;font-size:.82rem;font-weight:600;padding:.3em .7em;border-radius:999px;pointer-events:none}
+.ad .rotulo.izq{left:12px;background:rgba(255,255,255,.9)}
+.ad .rotulo.der{right:12px;background:var(--caléndula)}
+.ad input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+
+/* ---------- hero ---------- */
+.hero{padding:18px 0 56px}
+.hero .marca{font-family:var(--display);font-variation-settings:"SOFT" 100;font-weight:600;font-size:1.25rem;margin-bottom:28px}
+.hero h1 span{display:block}
+.hero h1 span+span{color:var(--caléndula-oscura)}
+.hero .ad{margin:28px 0 22px}
+.hero p{font-size:1.15rem;margin-bottom:24px}
+.pista{font-size:.9rem;margin-top:14px}
+@media (min-width:860px){
+  .hero .envoltura{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+  .hero .ad{margin:0;grid-row:1 / span 3;grid-column:2}
+}
+
+/* ---------- presentación ---------- */
+.hola{padding:64px 0;border-top:1px solid var(--linea)}
+.hola h2{margin-bottom:22px}
+.hola p+p{margin-top:14px}
+.hola .lista-servicios{list-style:none;padding:0;margin-top:30px;display:flex;flex-wrap:wrap;gap:10px}
+.hola .lista-servicios li{border:1.5px solid var(--tinta);border-radius:999px;padding:.35em .9em;font-size:.95rem}
+
+/* ---------- capítulos de marca ---------- */
+.capitulo{padding:64px 0 48px}
+.capitulo .cabeza{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;margin-bottom:10px}
+.capitulo .nombre{font-size:clamp(2.6rem,11vw,5.6rem);line-height:1;letter-spacing:.06em}
+.capitulo .tipo{font-weight:600}
+.capitulo .que{margin:12px 0 26px}
+.galeria{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:16px;padding:0 16px 14px;margin:0 -16px;scrollbar-width:thin}
+@media (min-width:1112px){.galeria{margin:0;padding-inline:0;scroll-padding-inline:0}}
+.galeria figure{flex:0 0 min(78vw,360px);scroll-snap-align:start}
+.galeria img,.galeria video{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:var(--borde);background:rgba(0,0,0,.06)}
+.galeria .ad img{height:100%}
+.galeria .vertical img,.galeria .vertical video{aspect-ratio:9/16}
+.galeria figcaption{font-size:.92rem;margin-top:8px}
+.galeria .marco{position:relative}
+.galeria .marco video[controls] + .sonido{top:10px;bottom:auto}   /* no tapar la barra de controles */
+.galeria .ad{aspect-ratio:4/5}
+.desliza{font-size:.88rem;margin-top:2px}
+.silleta{background:var(--silleta);color:var(--silleta-tinta)}
+.silleta .nombre{font-family:"Tenor Sans",var(--display);font-weight:400}
+.grano{background:var(--grano);color:#f3e7d8}
+.grano .nombre{font-family:"Marcellus",var(--display);font-weight:400;color:var(--grano-kraft)}
+.grano .suave{color:#cdb79f}
+.ceiba{background:var(--ceiba);color:var(--ceiba-tinta)}
+.ceiba .nombre{font-weight:500;letter-spacing:.02em}
+
+/* ---------- Valen ---------- */
+.valen{padding:72px 0}
+.valen .rejilla{display:grid;gap:28px}
+.valen .principal{position:relative;max-width:420px}
+.valen .principal video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:var(--borde)}
+.sonido{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:.45em;background:rgba(255,255,255,.92);color:var(--tinta);
+  border:0;border-radius:999px;padding:.55em .95em;font:600 .9rem var(--texto);cursor:pointer}
+.sonido svg{width:1.1em;height:1.1em}
+.valen video[controls] + .sonido{top:10px;bottom:auto}   /* no tapar la barra de controles; .valen le gana a la regla de .habla */
+.valen h2{margin-bottom:18px}
+.valen .tomas{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.valen .tomas video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:10px}
+.valen .tomas figcaption{font-size:.82rem;margin-top:6px}
+.valen .habla{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.valen .habla figure{position:relative}
+.valen .habla video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:10px}
+.valen .habla .sonido{left:8px;bottom:8px;font-size:.8rem;padding:.45em .75em}
+@media (min-width:860px){.valen .rejilla{grid-template-columns:420px 1fr;align-items:center;gap:56px}}
+
+/* ---------- cómo funciona ---------- */
+.pasos{padding:64px 0;border-top:1px solid var(--linea)}
+.pasos ol{list-style:none;padding:0;margin-top:28px;display:grid;gap:22px;counter-reset:paso}
+.pasos li{counter-increment:paso;display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:baseline}
+.pasos li::before{content:counter(paso);grid-row:span 2;font-family:var(--display);font-variation-settings:"SOFT" 100;font-weight:700;
+  font-size:2.6rem;line-height:1;color:var(--caléndula-oscura);min-width:1.1em}
+.pasos li strong{font-size:1.12rem}
+@media (min-width:860px){.pasos ol{grid-template-columns:repeat(3,1fr)}}
+
+/* ---------- precios ---------- */
+.precios{padding:64px 0;background:#f5f7f5}
+.precios .paquetes{display:grid;gap:18px;margin-top:30px}
+.paquete{background:var(--papel);border-radius:var(--borde);padding:26px 22px;border:1.5px solid var(--linea)}
+.paquete.destacado{border:2.5px solid var(--caléndula)}
+.paquete .etiqueta{display:inline-block;background:var(--caléndula);border-radius:999px;font-size:.82rem;font-weight:600;padding:.25em .75em;margin-bottom:12px}
+.paquete .precio{font-family:var(--display);font-variation-settings:"SOFT" 100;font-weight:700;font-size:2.2rem;margin:6px 0 2px}
+.paquete .precio small{font:500 .95rem var(--texto)}
+.paquete ul{padding-left:1.1em;margin-top:14px}
+.paquete li+li{margin-top:6px}
+.extras{margin-top:22px;font-size:.98rem}
+@media (min-width:860px){.precios .paquetes{grid-template-columns:repeat(3,1fr);align-items:start}}
+
+/* ---------- cierre ---------- */
+.cierre{padding:80px 0 120px;text-align:left}
+.cierre h2{max-width:12ch;margin-bottom:22px}
+.cierre .nota{font-size:.88rem;margin-top:40px;max-width:46em}
+footer{font-size:.85rem;padding:0 0 calc(96px + env(safe-area-inset-bottom))}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="riso" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="1" seed="4" result="ruido"/>
+      <feColorMatrix in="ruido" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -5 3.9" result="mascara"/>
+      <feComposite in="SourceGraphic" in2="mascara" operator="in"/>
+    </filter>
+  </defs>
+</svg>
+<nav class="nav" aria-label="Principal">
+  <div class="envoltura nav-in">
+    <a class="logo" href="#" aria-label="Yeison, inicio"><svg class="brote" viewBox="0 0 300 300" aria-hidden="true"><g filter="url(#riso)">
+        <path class="tallo" fill="currentColor" d="M141 152 C 143 188, 142 224, 142 254 C 142 266, 158 266, 158 254 C 158 224, 157 188, 159 152 Z"/>
+        <path class="hoja1" fill="currentColor" d="M153 166 C 120 158, 72 122, 56 50 C 108 60, 146 106, 158 160 Z"/>
+        <path class="hoja2" fill="currentColor" d="M147 154 C 162 112, 200 80, 248 72 C 240 118, 202 150, 147 154 Z"/>
+        <circle class="sol" cx="150" cy="70" r="26" fill="#f2a41c"/></g></svg><span>Yeison</span></a>
+    <ul class="enlaces">
+      <li><a href="#t-silleta">Trabajos</a></li><li><a href="#t-valen">Valen</a></li><li><a href="#t-pasos">Así trabajo</a></li><li><a href="#t-precios">Precios</a></li>
+    </ul>
+    <a class="nav-wa" data-whatsapp href="#" aria-label="Escribirme por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span>Escribime</span></a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="envoltura">
+    <h1><span>Así llegó.</span><span>Así quedó.</span></h1>
+    <div class="ad" style="--pos:50%" data-antes-despues>
+      <img src="media/silleta_flores.webp" alt="El perfume SILLETA en una finca de flores de Santa Elena" width="1080" height="1346">
+      <img class="antes" src="media/silleta_antes.webp" alt="El mismo perfume fotografiado con celular en una cocina" width="1080" height="1346">
+      <span class="divisor"></span>
+      <span class="perilla" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#16241c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+      <span class="rotulo izq">Foto de celular</span><span class="rotulo der">Con Yeison</span>
+      <input type="range" min="0" max="100" value="50" aria-label="Comparar la foto de celular con la foto terminada">
+    </div>
+    <div>
+      <p>Me mandás la foto de tu producto con el celular y te la devuelvo lista para vender: escenas, modelo y video. Hecho en Medellín con IA.</p>
+      <a class="boton" data-whatsapp href="#">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3a2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+        Pedir mi muestra gratis
+      </a>
+      <p class="pista suave">Arrastrá la línea sobre la foto para comparar.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hola" aria-labelledby="t-hola">
+  <div class="envoltura">
+    <h2 id="t-hola">¡Hola! Soy Yeison.</h2>
+    <p>Le ayudo a emprendedores de ropa, perfumes y cosméticos a que sus productos se vean como de marca grande, sin pagar estudio, fotógrafo ni modelo.</p>
+    <p>Vos ponés el producto. Yo pongo la luz, el lugar, la modelo y el video, con mucho cuidado de que tu producto quede idéntico: misma forma, mismo color y tus letras tal cual.</p>
+    <ul class="lista-servicios" aria-label="Lo que hago">
+      <li>Fotos de producto en escena</li><li>Modelo exclusiva para tu marca</li><li>Videos para Reels y TikTok</li><li>Producto en 3D que gira</li>
+    </ul>
+  </div>
+</section>
+
+<section class="capitulo silleta" aria-labelledby="t-silleta">
+  <div class="envoltura">
+    <div class="cabeza"><h2 class="nombre" id="t-silleta">SILLETA</h2><span class="tipo">Perfume de 50 ml</span></div>
+    <p class="que">Diseñamos el frasco en 3D, con su vidrio grueso, su tapa de madera y sus letras, y lo llevamos a una finca de flores de Santa Elena, a un tocador y a un jardín antioqueño.</p>
+    <div class="galeria" tabindex="0" aria-label="Fotos y videos de SILLETA">
+      <figure><img src="media/silleta_flores.webp" alt="SILLETA entre flores de silleta y montañas" loading="lazy" width="1080" height="1346"><figcaption>Finca de flores en Santa Elena</figcaption></figure>
+      <figure><img src="media/silleta_tocador.webp" alt="SILLETA en un tocador de mármol con rosas" loading="lazy" width="1080" height="1346"><figcaption>Tocador con luz de mañana</figcaption></figure>
+      <figure><img src="media/silleta_jardin.webp" alt="SILLETA sobre una piedra en un jardín con orquídeas" loading="lazy" width="1080" height="1346"><figcaption>Jardín antioqueño</figcaption></figure>
+      <figure class="vertical"><video src="media/silleta_spot.mp4" poster="media/silleta_spot_poster.jpg" autoplay muted loop playsinline preload="auto" data-auto aria-label="Comercial de SILLETA: la tapa sube, caen pétalos y vuelve a cerrar"></video><figcaption>Comercial de 13 segundos</figcaption></figure>
+      <figure class="vertical"><video src="media/silleta_giro.mp4" poster="media/silleta_giro_poster.jpg" autoplay muted loop playsinline preload="auto" data-auto aria-label="SILLETA girando 360 grados"></video><figcaption>Giro en 3D para Reels</figcaption></figure>
+      <figure><img src="media/silleta_packshot.webp" alt="SILLETA en fondo de estudio" loading="lazy" width="1080" height="1350"><figcaption>Foto de estudio para tu tienda</figcaption></figure>
+    </div>
+    <p class="desliza suave">Deslizá para ver más.</p>
+  </div>
+</section>
+
+<section class="capitulo grano" aria-labelledby="t-grano">
+  <div class="envoltura">
+    <div class="cabeza"><h2 class="nombre" id="t-grano">GRANO</h2><span class="tipo">Sérum de café de 30 ml</span></div>
+    <p class="que suave">Un gotero ámbar con etiqueta kraft, puesto donde vive el café: una mesa de nogal, una finca cafetera al atardecer y un baño con luz de ventana.</p>
+    <div class="galeria" tabindex="0" aria-label="Fotos y videos de GRANO">
+      <figure><div class="ad" style="--pos:50%" data-antes-despues>
+          <img src="media/grano_finca.webp" alt="GRANO en una finca cafetera al atardecer" loading="lazy" width="1080" height="1346">
+          <img class="antes" src="media/grano_antes.webp" alt="GRANO fotografiado con celular en un lavamanos" loading="lazy" width="1080" height="1346">
+          <span class="divisor"></span><span class="perilla" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#16241c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+          <span class="rotulo izq">Antes</span><span class="rotulo der">Después</span>
+          <input type="range" min="0" max="100" value="50" aria-label="Comparar antes y después de GRANO">
+        </div><figcaption>Antes y después</figcaption></figure>
+      <figure><img src="media/grano_cafe.webp" alt="GRANO sobre una tabla de nogal con granos de café" loading="lazy" width="1080" height="1346"><figcaption>Mesa de café tostado</figcaption></figure>
+      <figure><img src="media/grano_bano.webp" alt="GRANO en un baño con luz de ventana" loading="lazy" width="1080" height="1346"><figcaption>Baño con luz de ventana</figcaption></figure>
+      <figure><img src="media/grano_packshot.webp" alt="GRANO en fondo de estudio" loading="lazy" width="1080" height="1350"><figcaption>Foto de estudio</figcaption></figure>
+    </div>
+    <p class="desliza suave">Deslizá para ver más.</p>
+  </div>
+</section>
+
+<section class="capitulo ceiba" aria-labelledby="t-ceiba">
+  <div class="envoltura">
+    <div class="cabeza"><h2 class="nombre" id="t-ceiba">CEIBA</h2><span class="tipo">Conjunto de lino</span></div>
+    <p class="que">Sin sesión de fotos y sin modelo contratada: el mismo conjunto, puesto por Valen en un balcón con vista a Medellín, en un café y caminando por Laureles.</p>
+    <div class="galeria" tabindex="0" aria-label="Fotos y videos de CEIBA">
+      <figure class="vertical"><div class="marco">
+          <video src="media/ceiba_campana.mp4" poster="media/ceiba_campana_poster.jpg" autoplay muted loop playsinline preload="auto" data-auto aria-label="Mini campaña de CEIBA: Valen cuenta por qué usar lino, con tomas en Laureles y en un café"></video>
+          <button class="sonido" type="button" aria-pressed="false" data-sonido>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>
+        <span>Escuchar</span>
+      </button></div><figcaption>Mini campaña de 18 segundos</figcaption></figure>
+      <figure class="vertical"><div class="ad" style="--pos:50%;aspect-ratio:9/16" data-antes-despues>
+          <img src="media/ceiba_flatlay.webp" alt="El conjunto CEIBA doblado sobre piso de madera" loading="lazy" width="1080" height="1920">
+          <img class="antes" src="media/ceiba_antes.webp" alt="El mismo conjunto colgado en una puerta, foto de celular" loading="lazy" width="864" height="1536">
+          <span class="divisor"></span><span class="perilla" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#16241c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+          <span class="rotulo izq">Antes</span><span class="rotulo der">Después</span>
+          <input type="range" min="0" max="100" value="50" aria-label="Comparar antes y después de CEIBA">
+        </div><figcaption>Antes y después</figcaption></figure>
+      <figure class="vertical"><img src="media/ceiba_balcon.webp" alt="Valen con el conjunto CEIBA en un balcón con vista a Medellín" loading="lazy" width="1080" height="1920"><figcaption>Balcón con vista a la ciudad</figcaption></figure>
+      <figure class="vertical"><img src="media/ceiba_cafe.webp" alt="Valen riéndose en un café con el conjunto CEIBA" loading="lazy" width="1080" height="1920"><figcaption>Tarde de café</figcaption></figure>
+      <figure class="vertical"><img src="media/ceiba_laureles.webp" alt="Valen caminando por Laureles con el conjunto CEIBA" loading="lazy" width="1080" height="1920"><figcaption>Caminando por Laureles</figcaption></figure>
+    </div>
+    <p class="desliza suave">Deslizá para ver más.</p>
+  </div>
+</section>
+
+<section class="valen" aria-labelledby="t-valen">
+  <div class="envoltura rejilla">
+    <figure class="principal">
+      <video src="media/valen_habla_b.mp4" poster="media/valen_habla_b_poster.jpg" autoplay muted loop playsinline preload="auto" data-auto aria-label="Valen contando de qué material es el conjunto CEIBA"></video>
+      <button class="sonido" type="button" aria-pressed="false" data-sonido>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>
+        <span>Escuchar a Valen</span>
+      </button>
+    </figure>
+    <div>
+      <h2 id="t-valen">Valen, la modelo de tu marca</h2>
+      <p>Valen no existe: la creamos con IA, y por eso puede estar en tu balcón, en tu café o en tu tienda sin agenda ni sesión de fotos. Siempre tiene la misma cara, en cada foto y en cada video.</p>
+      <p style="margin-top:14px">Si tu marca quiere su propia modelo, la creamos solo para vos.</p>
+      <div class="tomas">
+        <figure><video src="media/ceiba_balcon.mp4" poster="media/ceiba_balcon_poster.jpg" autoplay muted loop playsinline preload="auto" data-auto aria-label="Valen en el balcón"></video><figcaption>Balcón</figcaption></figure>
+        <figure><video src="media/ceiba_laureles.mp4" poster="media/ceiba_laureles_poster.jpg" autoplay muted loop playsinline preload="auto" data-auto aria-label="Valen caminando por Laureles"></video><figcaption>Laureles</figcaption></figure>
+        <figure><video src="media/ceiba_cafe.mp4" poster="media/ceiba_cafe_poster.jpg" autoplay muted loop playsinline preload="auto" data-auto aria-label="Valen en un café"></video><figcaption>Café</figcaption></figure>
+      </div>
+      <h3 style="margin-top:34px">Y te lo cuenta ella</h3>
+      <div class="habla">
+        <figure><video src="media/valen_habla_a.mp4" poster="media/valen_habla_a_poster.jpg" autoplay muted loop playsinline preload="auto" data-auto aria-label="Valen: el conjunto de lino perfecto sí existe"></video>
+          <button class="sonido" type="button" aria-pressed="false" data-sonido>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>
+        <span>Escuchar</span>
+      </button></figure>
+        <figure><video src="media/valen_habla_c.mp4" poster="media/valen_habla_c_poster.jpg" autoplay muted loop playsinline preload="auto" data-auto aria-label="Valen: no cometás este error aunque haga calor"></video>
+          <button class="sonido" type="button" aria-pressed="false" data-sonido>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>
+        <span>Escuchar</span>
+      </button></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pasos" aria-labelledby="t-pasos">
+  <div class="envoltura">
+    <h2 id="t-pasos">Así trabajamos</h2>
+    <ol>
+      <li><strong>Me mandás la foto</strong><span class="suave">Por WhatsApp, tomada con tu celular. No tiene que ser bonita.</span></li>
+      <li><strong>Te devuelvo una muestra gratis</strong><span class="suave">Tu producto en una escena, para que veás cómo queda antes de pagar nada.</span></li>
+      <li><strong>Elegís tu paquete y arrancamos</strong><span class="suave">Pagás el 50 % para empezar y el resto cuando recibís todo.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="precios" aria-labelledby="t-precios">
+  <div class="envoltura">
+    <h2 id="t-precios">Paquetes</h2>
+    <p class="suave" style="margin-top:12px">Precios en pesos colombianos. Incluyen dos rondas de ajustes y el uso de todo en tus redes y en tu publicidad.</p>
+    <div class="paquetes">
+      <article class="paquete">
+        <h3>Esencial</h3>
+        <p class="precio">290.000 <small>COP</small></p>
+        <p class="suave">Para empezar a verte profesional.</p>
+        <ul><li>12 fotos de tus productos en escena (hasta 3 productos)</li><li>1 carrusel de 5 láminas</li><li>Entrega en 3 a 5 días hábiles</li></ul>
+      </article>
+      <article class="paquete destacado">
+        <span class="etiqueta">El más completo</span>
+        <h3>Campaña con modelo</h3>
+        <p class="precio">850.000 <small>COP</small></p>
+        <p class="suave">Tu producto puesto o usado por la misma modelo.</p>
+        <ul><li>15 fotos con la misma modelo</li><li>3 videos de 5 a 15 segundos para Reels y TikTok, con subtítulos</li><li>1 carrusel</li></ul>
+      </article>
+      <article class="paquete">
+        <h3>Mensual</h3>
+        <p class="precio">1.400.000 <small>COP / mes</small></p>
+        <p class="suave">Contenido fresco todo el mes, mínimo 3 meses.</p>
+        <ul><li>20 fotos de producto y con modelo</li><li>8 videos cortos</li><li>4 carruseles</li><li>Calendario sugerido de publicación</li></ul>
+      </article>
+    </div>
+    <p class="extras suave">¿Necesitás algo suelto? Video extra: 120.000. Foto de producto: 25.000. Foto con modelo: 35.000.</p>
+  </div>
+</section>
+
+<section class="cierre" aria-labelledby="t-cierre">
+  <div class="envoltura">
+    <h2 id="t-cierre">Mandame la foto de tu producto</h2>
+    <p style="margin-bottom:24px">Te respondo yo mismo y te devuelvo una muestra gratis.</p>
+    <a class="boton" data-whatsapp href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
+      Pedir mi muestra gratis
+    </a>
+    <p class="nota suave">SILLETA, GRANO y CEIBA son marcas de demostración que creamos para mostrar el proceso; Valen es una modelo creada con IA. Las fotos y los videos de esta página están hechos con inteligencia artificial y modelado 3D.</p>
+  </div>
+</section>
+</main>
+
+<footer><div class="envoltura suave">Yeison, desde Medellín, Colombia</div></footer>
+
+
+<script>
+// Número de WhatsApp de Yeison (con indicativo, sin +). Pendiente: lo da Yeison.
+const WHATSAPP = "573007056457";
+const MENSAJE = "Hola Yeison, vi tu catálogo y quiero mi muestra gratis.";
+document.querySelectorAll("[data-whatsapp]").forEach(a => {
+  a.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(MENSAJE)}`; a.target = "_blank"; a.rel = "noopener";
+});
+
+// Antes / después: el rango invisible mueve la línea (dedo, ratón y teclado)
+document.querySelectorAll("[data-antes-despues]").forEach(caja => {
+  const r = caja.querySelector("input");
+  const pon = v => caja.style.setProperty("--pos", v + "%");
+  r.addEventListener("input", () => pon(r.value));
+});
+
+// Videos: suenan en silencio y solo corren mientras se ven (revisión propia de posición; el IntersectionObserver no siempre avisa)
+const reducir = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const videos = [...document.querySelectorAll("video[data-auto]")];
+function revisar() {
+  const H = innerHeight, W = innerWidth;
+  videos.forEach(v => {
+    const r = v.getBoundingClientRect();
+    const visible = r.bottom > H * .15 && r.top < H * .85 && r.right > W * .1 && r.left < W * .9;
+    if (visible && v.paused) v.play().catch(() => {});
+    else if (!visible && !v.paused) v.pause();
+  });
+}
+if (reducir) videos.forEach(v => { v.removeAttribute("autoplay"); v.pause(); v.controls = true; });   // quien pidió menos animación decide con un toque
+else {
+  addEventListener("scroll", revisar, {passive: true}); addEventListener("resize", revisar);
+  document.querySelectorAll(".galeria").forEach(g => g.addEventListener("scroll", revisar, {passive: true}));
+  setInterval(revisar, 1000); revisar();
+}
+
+// Sonido: un solo video de Valen habla a la vez
+const botonesSonido = [...document.querySelectorAll("[data-sonido]")];
+botonesSonido.forEach(bs => bs.addEventListener("click", () => {
+  const v = bs.parentElement.querySelector("video"), activar = v.muted;
+  botonesSonido.forEach(o => { const ov = o.parentElement.querySelector("video"); ov.muted = true; o.setAttribute("aria-pressed", "false");
+    o.querySelector("span").textContent = o.dataset.texto || (o.dataset.texto = o.querySelector("span").textContent); });
+  if (activar) { v.muted = false; v.currentTime = 0; v.play().catch(() => {}); bs.setAttribute("aria-pressed", "true"); bs.querySelector("span").textContent = "Silenciar"; }
+}));
+
+// Nav: más compacta y translúcida al bajar
+const nav = document.querySelector(".nav");
+const marcarNav = () => nav.classList.toggle("bajado", scrollY > 8);
+addEventListener("scroll", marcarNav, {passive: true}); marcarNav();
+</script>
+</body>
+</html>
